@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "653240150116",
+    "project_id": "cozy-cove-d18bf",
+    "storage_bucket": "cozy-cove-d18bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653240150116:android:bff03c78366a9ee4655771",
+        "android_client_info": {
+          "package_name": "com.example.cozy_cove"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNsTJ9Hd1eww6_dCVd3ZyLmGAOZYPxlNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
