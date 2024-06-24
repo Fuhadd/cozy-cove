@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, unused_local_variable
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cozy_cove/locator.dart';
 import 'package:cozy_cove/models/user_data.dart';
+import 'package:cozy_cove/utils/enum.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,6 +18,9 @@ abstract class UserRepository {
 
   Future<bool> checkIfEmailExists(String email);
   Future<bool> checkIfPseudonymExists(String pseudonym);
+  Future<void> assignCounsellor(String userId, UserDataModel counsellor);
+  Future<List<UserDataModel>?> fetchAllUsersWithoutCounsellor();
+  Future<List<UserDataModel>?> fetchAllCounsellors();
   Future isUserSignedIn();
   Future logOut();
   Future resetPassword(String email);
@@ -202,6 +209,8 @@ class UserRepositoryImpl implements UserRepository {
           "hobby": hobby,
           'hobbyDetails': hobbyDetails,
           'selectedInterests': selectedInterests,
+          "userType": UserType.regular.index,
+          "userStatus": UserStatus.unSubscribed.index,
         },
         SetOptions(
           merge: true,
@@ -221,6 +230,71 @@ class UserRepositoryImpl implements UserRepository {
         return UserDataModel.fromJson(snapshot.data());
       }
     } catch (error) {}
+    return null;
+  }
+
+  @override
+  Future<List<UserDataModel>?> fetchAllUsersWithoutCounsellor() async {
+    try {
+      List<UserDataModel> users = [];
+      final QuerySnapshot querySnapshot = await firebaseFirestore
+          // .where('members', arrayContains: uid)
+          .where('userType', isEqualTo: UserType.regular.index)
+          .where('userStatus', isEqualTo: UserStatus.unSubscribed.index)
+          .where('counsellorId', isEqualTo: null)
+          // .orderBy('createdBy', descending: true)
+          .get();
+
+      for (var user in querySnapshot.docs) {
+        var result = UserDataModel.fromJson(user.data());
+        users.add(result);
+      }
+
+      return users;
+    } catch (e, stacktrace) {
+      debugPrint(e.toString());
+
+      log(e.toString());
+      log(stacktrace.toString());
+    }
+    return null;
+  }
+
+  @override
+  Future<void> assignCounsellor(String userId, UserDataModel counsellor) async {
+    try {
+      await firebaseFirestore.doc(userId).update({
+        'counsellorId': counsellor.id,
+        'counsellorName': counsellor.pseudonym,
+      });
+      print('Counsellor assigned successfully');
+    } catch (e) {
+      print('Error assigning counsellor: $e');
+    }
+  }
+
+  @override
+  Future<List<UserDataModel>?> fetchAllCounsellors() async {
+    try {
+      List<UserDataModel> users = [];
+      final QuerySnapshot querySnapshot = await firebaseFirestore
+          .where('userType', isEqualTo: UserType.counsellor.index)
+          // .orderBy('createdBy', descending: true)
+          .get();
+
+      for (var user in querySnapshot.docs) {
+        var result =
+            UserDataModel.fromJson(user.data() as Map<String, dynamic>);
+        users.add(result);
+      }
+
+      return users;
+    } catch (e, stacktrace) {
+      debugPrint(e.toString());
+
+      log(e.toString());
+      log(stacktrace.toString());
+    }
     return null;
   }
 

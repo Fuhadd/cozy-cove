@@ -15,6 +15,19 @@ enum InfoBoxType {
   question
 }
 
+enum UserType {
+  unknown,
+  regular,
+  counsellor,
+  admin,
+}
+
+enum UserStatus {
+  unknown,
+  unSubscribed,
+  subscribed,
+}
+
 String getIconPath(InfoBoxType type) {
   switch (type) {
     case InfoBoxType.success:

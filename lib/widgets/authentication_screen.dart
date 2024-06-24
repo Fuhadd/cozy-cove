@@ -85,7 +85,7 @@ class _AuthFormWidgetState extends State<AuthFormWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        verticalSpacer(MediaQuery.of(context).padding.top + 40),
+                        verticalSpacer(MediaQuery.of(context).padding.top + 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

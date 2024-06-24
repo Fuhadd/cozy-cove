@@ -13,6 +13,8 @@ class UserDataModel {
     this.healthGoal,
     this.hobbyDetails,
     this.selectedInterests,
+    this.userType,
+    this.userStatus,
   });
 
   String id;
@@ -22,6 +24,8 @@ class UserDataModel {
   String avatarUrl;
   int? currentHealth;
   int? healthGoal;
+  int? userType;
+  int? userStatus;
   String? healthDetails;
   String? primaryHealthGoal;
   String? secondaryHealthGoal;
@@ -38,6 +42,8 @@ class UserDataModel {
         currentHealth: json["currentHealth"],
         healthDetails: json["healthDetails"],
         healthGoal: json["healthGoal"],
+        userType: json["userType"],
+        userStatus: json["userStatus"],
         primaryHealthGoal: json["primaryHealthGoal"],
         secondaryHealthGoal: json["secondaryHealthGoal"],
         hobby: json["hobby"],
@@ -56,6 +62,8 @@ class UserDataModel {
         "currentHealth": currentHealth,
         "healthDetails": healthDetails,
         "healthGoal": healthGoal,
+        "userType": userType,
+        "userStatus": userStatus,
         "primaryHealthGoal": primaryHealthGoal,
         "secondaryHealthGoal": secondaryHealthGoal,
         "hobby": hobby,

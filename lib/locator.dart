@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/local_cache/local_cache.dart';
 import 'data/local_cache/local_cache_impl.dart';
-import 'data/repositories/chat_repo.dart';
 import 'data/repositories/user_repo.dart';
 import 'utils/navigator_handler.dart';
 
@@ -22,11 +21,6 @@ Future<void> setupLocator() async {
   );
   locator.registerLazySingleton<UserRepository>(
     () => UserRepositoryImpl(
-      cache: locator(),
-    ),
-  );
-  locator.registerLazySingleton<ChatRepository>(
-    () => ChatRepositoryImpl(
       cache: locator(),
     ),
   );

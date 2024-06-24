@@ -5,6 +5,7 @@ import 'dart:math' as maths;
 import 'package:cozy_cove/models/user_data.dart';
 import 'package:cozy_cove/screens/authentication/sign_in/sign_up_success_screen.dart';
 import 'package:cozy_cove/screens/dashboard/bottom_navigation_screen.dart';
+import 'package:cozy_cove/utils/enum.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -112,6 +113,7 @@ class AuthViewModel extends BaseChangeNotifier {
             hobby: hobby,
             hobbyDetails: hobbyDetails,
             selectedInterests: selectedInterests,
+            userType: UserType.regular.index,
           );
           final userJson = json.encode(user.toJson());
           localCache.saveToLocalCache(

@@ -1,6 +1,7 @@
 import 'package:cozy_cove/constants/custom_colors.dart';
 import 'package:cozy_cove/firebase_options.dart';
 import 'package:cozy_cove/locator.dart';
+import 'package:cozy_cove/screens/admin/assign_counsellor_screen.dart';
 import 'package:cozy_cove/screens/authentication/sign_in/quests_onboard_screen.dart';
 import 'package:cozy_cove/screens/authentication/sign_up/sign_in_screen.dart';
 import 'package:cozy_cove/screens/onboarding/onboading_page_view.dart';
@@ -58,7 +59,9 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: CustomColors.whiteColor)
               .copyWith(background: CustomColors.whiteColor),
         ),
-        home: const PrelaunchScreen(),
+        home:
+            // const UsersWithoutCounsellorScreen(),
+            const PrelaunchScreen(),
 
         //  StreamBuilder<User?>(
         //     stream: FirebaseAuth.instance.authStateChanges(),
